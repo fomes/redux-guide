@@ -3,8 +3,8 @@ import * as Styles from "./styles";
 
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser, logoutUser } from "../../redux/user/actions";
 import { selectProductsCount } from "../../redux/cart/cart.selectors";
+import { userLogin, userLogout } from "../../redux/user/slice";
 
 function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
@@ -14,18 +14,17 @@ function Header() {
   };
 
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
-  // const { products } = useSelector((rootReducer) => rootReducer.cartReducer);
 
   const dispatch = useDispatch();
 
   const handleLoginClick = () => {
-    dispatch(loginUser({ name: "Felipe", email: "felipe@mail.com" }));
+    dispatch(userLogin({ name: "Felipe", email: "felipe@mail.com" }));
   };
 
   const productsCount = useSelector(selectProductsCount);
 
   const handleLogoutClick = () => {
-    dispatch(logoutUser());
+    dispatch(userLogout());
   };
 
   return (
